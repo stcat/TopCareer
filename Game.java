@@ -76,25 +76,25 @@ public class Game {
 		
 		// solve the TSP (travelling salesman problem) with dynamic programming  
 		int n = numberOfCheckpoints + 1;
-	    int[][] dp = new int[1 << n][n];
-	    for (int[] d : dp) {
-	    	Arrays.fill(d, Integer.MAX_VALUE / 2);
-	    }
-	    dp[1][0] = 0;
-	    for (int mask = 1; mask < 1 << n; mask += 2) {
-	    	for (int i = 1; i < n; i++) {
-	    		if ((mask & 1 << i) != 0) {
-	    			for (int j = 0; j < n; j++) {
-	    				if ((mask & 1 << j) != 0) {
-	    					dp[mask][i] = Math.min(dp[mask][i], dp[mask ^ (1 << i)][j] + distance[j][i]);
+		int[][] dp = new int[1 << n][n];
+		for (int[] d : dp) {
+			Arrays.fill(d, Integer.MAX_VALUE / 2);
+		}
+		dp[1][0] = 0;
+		for (int mask = 1; mask < 1 << n; mask += 2) {
+			for (int i = 1; i < n; i++) {
+				if ((mask & 1 << i) != 0) {
+					for (int j = 0; j < n; j++) {
+						if ((mask & 1 << j) != 0) {
+	    						dp[mask][i] = Math.min(dp[mask][i], dp[mask ^ (1 << i)][j] + distance[j][i]);
+	    					}
 	    				}
 	    			}
-	    		}
+			}
 	    	}
-	    }
-	    for (int i = 1; i < n; i++) {
-	    	minPath= Math.min(minPath, dp[(1 << n) - 1][i] + distance[i][n]);
-	    }
+	    	for (int i = 1; i < n; i++) {
+	    		minPath= Math.min(minPath, dp[(1 << n) - 1][i] + distance[i][n]);
+	    	}
 		return minPath;
 	}
 	
