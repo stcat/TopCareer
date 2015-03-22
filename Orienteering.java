@@ -16,10 +16,10 @@ public class Orienteering {
 			char[][] board = new char[height][width];
 			int i = 0;
 			while((line = in.readLine()) != null){  
-                for(int j = 0; j < width; j++){ 
-                       board[i][j] = line.charAt(j); 
-                } 
-                i++; 
+                		for(int j = 0; j < width; j++){ 
+                       			board[i][j] = line.charAt(j); 
+                		} 
+                		i++; 
 			}
 			in.close();
 			
